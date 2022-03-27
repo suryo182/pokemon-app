@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import {
   CtaButton,
@@ -20,7 +21,9 @@ function HeroSection() {
           You can know the type of Pokemon, its strengths, disadvantages and
           abilities
         </HeroDescription>
-        <CtaButton>See All Pokemons</CtaButton>
+        <Link href="#directory">
+          <CtaButton>See All Pokemons</CtaButton>
+        </Link>
       </HeroContentWrapper>
       <HeroImageWrapper>
         <Image

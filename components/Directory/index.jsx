@@ -1,38 +1,34 @@
-import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  DirectoryItem,
   DirectoryList,
   DirectorySearch,
   DirectoryTitle,
   DirectoryWrapper,
-  PokemonImageWrapper,
-  PokemonInfoWrapper,
-  PokemonTitle,
-  PokemonType,
-  TypeWrapper,
 } from './styles';
+import Card from '../Card';
 
-function Directory() {
+function Directory({ pokemons }) {
+  const [search, setSearch] = useState('');
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const filteredPokemons = search
+    ? pokemons.filter((el) => {
+        const clonedElem = { ...el };
+        return clonedElem.name.toLowerCase().includes(search.toLowerCase());
+      })
+    : pokemons;
+
   return (
-    <DirectoryWrapper>
+    <DirectoryWrapper id='directory'>
       <DirectoryTitle>
         100+ <strong>Pokemons</strong> for you to choose your favorite
       </DirectoryTitle>
-      <DirectorySearch placeholder="Search..." />
+      <DirectorySearch placeholder="Search..." onChange={handleSearch} />
       <DirectoryList>
-        <DirectoryItem>
-          <PokemonInfoWrapper>
-            <PokemonTitle>Mudkip</PokemonTitle>
-            <TypeWrapper>
-              <PokemonType>Poison</PokemonType>
-              <PokemonType>Grass</PokemonType>
-            </TypeWrapper>
-          </PokemonInfoWrapper>
-          <PokemonImageWrapper>
-            <Image src="/img/sample.png" alt="pokemon" layout="fill" />
-          </PokemonImageWrapper>
-        </DirectoryItem>
+        {filteredPokemons.length > 0 &&
+          filteredPokemons.map((pokemon) => <Card pokemon={pokemon} />)}
       </DirectoryList>
     </DirectoryWrapper>
   );

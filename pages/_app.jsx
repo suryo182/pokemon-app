@@ -2,6 +2,9 @@ import Head from 'next/head';
 import { Global, css } from '@emotion/react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { ApolloProvider } from '@apollo/client';
+import client from '../apollo-client';
+import styled from '@emotion/styled';
 
 const GlobalStyles = css`
   * {
@@ -13,6 +16,10 @@ const GlobalStyles = css`
   html {
     scroll-behavior: smooth;
   }
+`;
+
+const MainSection = styled.main`
+  margin-top: 80px;
 `;
 
 function MyApp({ Component, pageProps }) {
@@ -27,13 +34,22 @@ function MyApp({ Component, pageProps }) {
 
       {/* Google Fonts */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+      <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossOrigin="true"
+      />
       <link
         href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700;800&family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap"
         rel="stylesheet"
       />
       <Header />
-      <Component {...pageProps} />
+
+      <ApolloProvider client={client}>
+        <MainSection>
+          <Component {...pageProps} />
+        </MainSection>
+      </ApolloProvider>
       <Footer />
     </>
   );

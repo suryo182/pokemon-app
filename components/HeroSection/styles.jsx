@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 export const HeroWrapper = styled.section`
   position: relative;
   display: grid;
-  margin-top: 80px;
   padding: 1.4rem 0;
   height: max-content;
   background: linear-gradient(180deg, #f5db13 0%, #f2b807 100%);
@@ -24,16 +23,24 @@ export const HeroTitle = styled.h1`
   font-weight: 400;
   margin-bottom: 1rem;
   text-align: center;
-  font-size: 48px;
+  font-size: 32px;
   color: #333;
+
+  @media (min-width: 768px) {
+    font-size: 48px;
+  }
 `;
 export const HeroDescription = styled.h2`
   font-family: Karla, sans-serif;
   font-weight: 400;
   margin-bottom: 0.8rem;
   text-align: center;
-  font-size: 28px;
+  font-size: 18px;
   color: #333;
+
+  @media (min-width: 768px) {
+    font-size: 24px;
+  }
 `;
 
 export const CtaButton = styled.button`
