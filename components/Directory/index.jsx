@@ -9,6 +9,7 @@ import Card from '../Card';
 
 function Directory({ pokemons }) {
   const [search, setSearch] = useState('');
+
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
@@ -21,14 +22,16 @@ function Directory({ pokemons }) {
     : pokemons;
 
   return (
-    <DirectoryWrapper id='directory'>
+    <DirectoryWrapper id="directory">
       <DirectoryTitle>
-        100+ <strong>Pokemons</strong> for you to choose your favorite
+        10+ <strong>Pokemons</strong> for you to choose your favorite
       </DirectoryTitle>
       <DirectorySearch placeholder="Search..." onChange={handleSearch} />
       <DirectoryList>
         {filteredPokemons.length > 0 &&
-          filteredPokemons.map((pokemon) => <Card pokemon={pokemon} />)}
+          filteredPokemons.map((pokemon) => (
+            <Card pokemon={pokemon} key={pokemon.name} />
+          ))}
       </DirectoryList>
     </DirectoryWrapper>
   );

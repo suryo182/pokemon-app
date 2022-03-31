@@ -1,58 +1,95 @@
+import request from 'graphql-request';
+import Image from 'next/image';
 import React from 'react';
+import { PokemonImageWrapper } from '../../components/Card/styles';
 import {
+  ButtonCatch,
+  ContentWrapper,
+  DetailWrapper,
+  PokemonTitle,
   StatsBlock,
+  StatsLabel,
+  StatsTab,
+  StatsText,
   StatsTitle,
   StatsWrapper,
-  StatsLabel,
-  StatsText,
-  StatsTab,
-  PokemonTitle,
   TabTitle,
-  TypesWrapper,
   TypeName,
+  TypesWrapper,
 } from './styles';
-import { DetailWrapper } from './styles';
-import request from 'graphql-request';
 
-function PokemonDetail({ data }) {
-  console.log({ data });
+function PokemonDetail({ pokemon, allPokemons }) {
+  const pokemonName = pokemon.pokemon.name;
+  const { pokemons } = allPokemons;
+  const currentPokemonImage =
+    pokemons.results.length > 0 &&
+    pokemons.results.find((pokemon) => pokemon.name === pokemonName).image;
+
+  const handleButtonCatch = () => {
+    if (Math.random() < 0.5) {
+      alert('Congratulation, you catch a pokemon!');
+      if (localStorage.getItem(pokemonName)) {
+        localStorage.setItem(
+          pokemonName,
+          localStorage.getItem(pokemonName) + 1
+        );
+      } else {
+        localStorage.setItem(pokemonName, 1);
+      }
+    } else {
+      alert('Sorry, you failed to catch a pokemon!');
+    }
+  };
+
   return (
     <DetailWrapper>
-      <PokemonTitle>{data.name}</PokemonTitle>
+      <PokemonTitle>{pokemonName}</PokemonTitle>
       <StatsTab>
         <TabTitle>Stats</TabTitle>
       </StatsTab>
-      <StatsWrapper>
-        <StatsTitle>Biodata</StatsTitle>
-        <StatsBlock>
-          <StatsLabel>Name: </StatsLabel>
-          <StatsText>{data.name}</StatsText>
-        </StatsBlock>
-        <StatsBlock>
-          <StatsLabel>Forms: </StatsLabel>
-          <StatsText>{data.forms.name}</StatsText>
-        </StatsBlock>
-        <StatsBlock>
-          <StatsLabel>Height: </StatsLabel>
-          <StatsText>{data.height} decimeters</StatsText>
-        </StatsBlock>
-        <StatsBlock>
-          <StatsLabel>Weight: </StatsLabel>
-          <StatsText>{data.weight} hectogram</StatsText>
-        </StatsBlock>
-
-        <StatsBlock>
-          <StatsTitle>Types</StatsTitle>
-          <TypesWrapper>
-            {data.types.length > 0 &&
-              data.types.map((item, index) => (
-                <TypeName pokemonType={item.type.name} key={index}>
-                  {item.type.name}
-                </TypeName>
-              ))}
-          </TypesWrapper>
-        </StatsBlock>
-      </StatsWrapper>
+      <ContentWrapper>
+        <StatsWrapper>
+          <StatsTitle>Biodata</StatsTitle>
+          <StatsBlock>
+            <StatsLabel>Name: </StatsLabel>
+            <StatsText>{pokemon.pokemon.name}</StatsText>
+          </StatsBlock>
+          <StatsBlock>
+            <StatsLabel>Forms: </StatsLabel>
+            <StatsText>{pokemon.pokemon.forms.name}</StatsText>
+          </StatsBlock>
+          <StatsBlock>
+            <StatsLabel>Height: </StatsLabel>
+            <StatsText>{pokemon.pokemon.height} decimeters</StatsText>
+          </StatsBlock>
+          <StatsBlock>
+            <StatsLabel>Weight: </StatsLabel>
+            <StatsText>{pokemon.pokemon.weight} hectogram</StatsText>
+          </StatsBlock>
+          <StatsBlock>
+            <StatsTitle>Types</StatsTitle>
+            <TypesWrapper>
+              {pokemon.pokemon.types.length > 0 &&
+                pokemon.pokemon.types.map((item, index) => (
+                  <TypeName pokemonType={item.type.name} key={index}>
+                    {item.type.name}
+                  </TypeName>
+                ))}
+            </TypesWrapper>
+          </StatsBlock>
+          <ButtonCatch onClick={handleButtonCatch}>Catch!</ButtonCatch>
+        </StatsWrapper>
+        <PokemonImageWrapper>
+          {currentPokemonImage && (
+            <Image
+              src={currentPokemonImage}
+              alt="pokemon"
+              layout="fill"
+              objectFit="cover"
+            />
+          )}
+        </PokemonImageWrapper>
+      </ContentWrapper>
     </DetailWrapper>
   );
 }
@@ -60,10 +97,29 @@ function PokemonDetail({ data }) {
 export default PokemonDetail;
 
 export async function getServerSideProps({ params }) {
+  const url = 'https://graphql-pokeapi.vercel.app/api/graphql';
   const { name } = params;
   const variables = {
     name,
   };
+
+  const getAllPokemons = `
+      query Pokemons {
+        pokemons {
+          count
+          next
+          previous
+          status
+          message
+          results {
+            id
+            url
+            name
+            image
+          }
+        }
+      }
+    `;
 
   const getPokemon = `
      query GetPokemon($name: String!){
@@ -98,17 +154,14 @@ export async function getServerSideProps({ params }) {
     }
   `;
 
-  const response = await request(
-    'https://graphql-pokeapi.vercel.app/api/graphql',
-    getPokemon,
-    variables
-  );
+  const pokemon = await request(url, getPokemon, variables);
 
-  const data = response.pokemon;
+  const allPokemons = await request(url, getAllPokemons);
 
   return {
     props: {
-      data,
+      pokemon,
+      allPokemons,
     },
   };
 }

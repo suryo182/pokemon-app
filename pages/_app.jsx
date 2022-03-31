@@ -16,15 +16,28 @@ const GlobalStyles = css`
   html {
     scroll-behavior: smooth;
   }
+
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+  }
 `;
 
 const MainSection = styled.main`
+  flex-grow: 1;
   margin-top: 80px;
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`
+
 function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <Wrapper>
       <Global styles={GlobalStyles} />
       <Head>
         <title>Pokemon App</title>
@@ -51,7 +64,7 @@ function MyApp({ Component, pageProps }) {
         </MainSection>
       </ApolloProvider>
       <Footer />
-    </>
+    </Wrapper>
   );
 }
 

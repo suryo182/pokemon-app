@@ -6,9 +6,21 @@ export const HeroWrapper = styled.section`
   padding: 1.4rem 0;
   height: max-content;
   background: linear-gradient(180deg, #f5db13 0%, #f2b807 100%);
+`;
+
+export const Container = styled.div`
+  margin: 0 auto;
 
   @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
+    max-width: 768px;
+  }
+
+  @media (min-width: 1024px) {
+    max-width: 1024px;
+  }
+
+  @media (min-width: 1280px) {
+    max-width: 1280px;
   }
 `;
 

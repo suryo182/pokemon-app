@@ -14,22 +14,21 @@ function Header() {
   return (
     <HeaderWrapper>
       <NavWrapper>
-        <ImageWrapper>
-          <Image
-            src="/icon/pokemon-logo.svg"
-            alt="app logo"
-            layout="fill"
-            objectFit="contain"
-          />
-        </ImageWrapper>
+        <Link href="/">
+          <ImageWrapper>
+            <Image
+              src="/icon/pokemon-logo.svg"
+              alt="app logo"
+              layout="fill"
+              objectFit="contain"
+            />
+          </ImageWrapper>
+        </Link>
 
         <NavMenuWrapper>
           <NavMenuList>
             <NavMenuItem>
               <Link href="/">Home</Link>
-            </NavMenuItem>
-            <NavMenuItem>
-              <Link href="/pokemon-list">Pokédex</Link>
             </NavMenuItem>
             <NavMenuItem>
               <Link href="/favorite">My Pokemon List</Link>

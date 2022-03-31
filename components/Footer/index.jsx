@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { FooterWrapper, FooterContent } from './styles';
 
 const Footer = () => {
   return (
-    <div>Footer</div>
-  )
-}
+    <FooterWrapper>
+      <FooterContent>&copy; 2022. Suryo Adi Nugroho. All rights reserved.</FooterContent>
+    </FooterWrapper>
+  );
+};
 
-export default Footer
+export default Footer;

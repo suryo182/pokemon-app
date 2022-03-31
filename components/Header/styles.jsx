@@ -37,6 +37,7 @@ export const ImageWrapper = styled.div`
   position: relative;
   width: 100px;
   height: 40px;
+  cursor: pointer;
 `;
 
 export const NavMenuWrapper = styled.div`
