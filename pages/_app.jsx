@@ -1,10 +1,10 @@
 import Head from 'next/head';
 import { Global, css } from '@emotion/react';
+import { ApolloProvider } from '@apollo/client';
+import styled from '@emotion/styled';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { ApolloProvider } from '@apollo/client';
 import client from '../apollo-client';
-import styled from '@emotion/styled';
 
 const GlobalStyles = css`
   * {
@@ -33,7 +33,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-`
+`;
 
 function MyApp({ Component, pageProps }) {
   return (

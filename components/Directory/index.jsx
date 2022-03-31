@@ -16,9 +16,9 @@ function Directory({ pokemons }) {
 
   const filteredPokemons = search
     ? pokemons.filter((el) => {
-        const clonedElem = { ...el };
-        return clonedElem.name.toLowerCase().includes(search.toLowerCase());
-      })
+      const clonedElem = { ...el };
+      return clonedElem.name.toLowerCase().includes(search.toLowerCase());
+    })
     : pokemons;
 
   return (

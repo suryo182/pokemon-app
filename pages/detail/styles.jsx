@@ -77,30 +77,30 @@ export const TypeName = styled.div`
   font-weight: 400;
   padding: 0.3rem 1.2rem;
   background: ${(props) =>
-    props.pokemonType === 'grass' || props.pokemonType === 'bug'
+    (props.pokemonType === 'grass' || props.pokemonType === 'bug'
       ? '#73D677'
       : props.pokemonType === 'stile' ||
         props.pokemonType === 'dark' ||
         props.pokemonType === 'rock'
-      ? '#A1A1A1'
-      : props.pokemonType === 'ice' || props.pokemonType === 'water'
-      ? '#A2CFF0'
-      : props.pokemonType === 'fire' ||
+        ? '#A1A1A1'
+        : props.pokemonType === 'ice' || props.pokemonType === 'water'
+          ? '#A2CFF0'
+          : props.pokemonType === 'fire' ||
         props.pokemonType === 'fighting' ||
         props.pokemonType === 'dragon'
-      ? '#F76545'
-      : props.pokemonType === 'normal' || props.pokemonType === 'ghost'
-      ? '#76AADB'
-      : props.pokemonType === 'poison' ||
+            ? '#F76545'
+            : props.pokemonType === 'normal' || props.pokemonType === 'ghost'
+              ? '#76AADB'
+              : props.pokemonType === 'poison' ||
         props.pokemonType === 'psychic' ||
         props.pokemonType === 'fairy' ||
         props.pokemonType === 'ghost'
-      ? '#A974BC'
-      : props.pokemonType === 'ground'
-      ? '#9B897B'
-        ? props.pokemonType === 'electric'
-        : '#F7C545'
-      : ''};
+                ? '#A974BC'
+                : props.pokemonType === 'ground'
+                  ? '#9B897B'
+                    ? props.pokemonType === 'electric'
+                    : '#F7C545'
+                  : '')};
   box-shadow: inset 0px -2px 0px rgba(0, 0, 0, 0.18);
   border-radius: 11px;
   border: none;

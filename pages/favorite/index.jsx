@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { gql } from '@apollo/client';
 import { FavoriteWrapper, FavoriteList } from './styles';
 import Card from '../../components/Card';
 import client from '../../apollo-client';
-import { gql } from '@apollo/client';
 
-const Favorite = ({ data }) => {
+function Favorite({ data }) {
   const [list, setList] = useState();
   const pokemons = data.pokemons.results;
   const allPokemonNames = pokemons.map((pokemon) => pokemon.name);
@@ -35,7 +35,7 @@ const Favorite = ({ data }) => {
       </FavoriteList>
     </FavoriteWrapper>
   );
-};
+}
 
 export default Favorite;
 

@@ -31,7 +31,7 @@ function PokemonDetail({ pokemon, allPokemons }) {
       if (localStorage.getItem(pokemonName)) {
         localStorage.setItem(
           pokemonName,
-          localStorage.getItem(pokemonName) + 1
+          localStorage.getItem(pokemonName) + 1,
         );
       } else {
         localStorage.setItem(pokemonName, 1);

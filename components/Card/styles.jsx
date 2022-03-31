@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import Link from 'next/link';
 
 export const CardWrapper = styled.div`
   padding: 0.8rem 0.4rem;
