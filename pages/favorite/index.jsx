@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { gql } from '@apollo/client';
-import { FavoriteWrapper, FavoriteList } from './styles';
+import { FavoriteWrapper, FavoriteList } from '../../styles/styles';
 import Card from '../../components/Card';
 import client from '../../apollo-client';
 

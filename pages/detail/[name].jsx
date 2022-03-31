@@ -16,7 +16,7 @@ import {
   TabTitle,
   TypeName,
   TypesWrapper,
-} from './styles';
+} from '../../styles/styles';
 
 function PokemonDetail({ pokemon, allPokemons }) {
   const pokemonName = pokemon.pokemon.name;
